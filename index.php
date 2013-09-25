@@ -1,19 +1,4 @@
 <?php
-
-function pg_connection_string() {
-  // we will fill this out next
-}
- 
-# Establish db connection
-$db = pg_connect(pg_connection_string());
-if (!$db) {
-   echo "Database connection error."
-   exit;
-}
- 
-$result = pg_query($db, "SELECT statement goes here");
-
-
 error_reporting (E_ALL);
 require_once(dirname(__FILE__)."/classes/Origin.php");
 require_once(dirname(__FILE__)."/classes/Ad.php");
