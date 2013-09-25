@@ -1,0 +1,12 @@
+Installation (http://phpunit.de/manual/3.7/en/installation.html)
+
+1. Create composer.json file
+{
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    }
+}
+
+2. curl http://getcomposer.org/installer | php
+
+3. php composer.phar install
