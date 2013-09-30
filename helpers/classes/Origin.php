@@ -1,5 +1,5 @@
 <?php
-require (dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'helpers.php');
+require (dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'helpers.php');
 
 class Origin{
 	public function __construct(){
@@ -24,9 +24,9 @@ class Origin{
 		$doc = new DOMDocument();
 		$previousSetting = libxml_use_internal_errors(true);// the previuos value of libxml_use_internal_errors
 		$content = preg_replace('/\<br( )*\/>/', " ", file_get_contents($url));
-		libxml_use_internal_errors($previousSetting); // set the initial value of libxml_use_internal_errors
 
 		$doc->loadHTML($content);
+		libxml_use_internal_errors($previousSetting); // set the initial value of libxml_use_internal_errors
 		
 		$xpath = new DOMXpath($doc);
 		$ads = $xpath->query("//*/ul[@class='list']/li");
