@@ -43,7 +43,7 @@ class Origin{
 					$adCurrent->content = trim($adDiv->nodeValue);
 					$links = $adDiv->getElementsByTagName('a');
 					foreach ($links as $link) {
-						$adCurrent->url .= $this->url.$link->getAttribute('href');
+						$adCurrent->url .= $this->url.basename($link->getAttribute('href'));
 					}
 				}
 			}
