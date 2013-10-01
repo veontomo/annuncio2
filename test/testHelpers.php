@@ -16,5 +16,12 @@ class HelpersTest extends PHPUnit_Framework_TestCase
     }   
 
 
+    public function testSetEndTime(){
+        $this->assertTrue(function_exists("setEndTime"), "function setEndTime is not defined");
+        $this->assertEquals(setEndTime("16 Oct 2013"), strtotime("16 Oct 2013"));
+        $this->assertEquals(setEndTime("16 Oct 2013 10:15"), strtotime("16 Oct 2013 10:15"));
+        $this->assertEquals(setEndTime("sasasd"), strtotime("-1 hour"));
+    }
+
 }
 ?>

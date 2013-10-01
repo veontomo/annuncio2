@@ -1,3 +1,3 @@
 $(document).ready(function(){
-	alert("Loaded");
+	$('#time-start').timepicker({ 'timeFormat': 'g:ia' });
 })

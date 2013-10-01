@@ -1,5 +1,5 @@
 <?php
-require (dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'helpers.php');
+require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'helpers.php';
 
 class Origin{
 	public function __construct(){
@@ -15,6 +15,7 @@ class Origin{
 	public $url_template;
 	private $ads;
 	public $maxPage;
+
 
 	/**
 	* retrieves the content of the $url, fills in the property $ads with the advertisments found on that $url.
@@ -71,7 +72,6 @@ class Origin{
 	public function getAds(){
 		return $this->ads;
 	}
-
 
 }
 ?>
