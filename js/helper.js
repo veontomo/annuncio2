@@ -20,7 +20,7 @@ $(document).ready(function(){
 					if(	data.result.length>0){
 						$('<ol id="ajax-ads"></ol>').appendTo('#all-ads');
 						$.each(data.result, function(key, ad){
-							var adText = ad.pubdate + ' <a href="' + ad.url + '">' + ad.content + '</a>';
+							var adText = ad.pubdate + ' <a href="' + ad.url + '" target="blank">' + ad.content + '</a>';
 							$('<li>'+ adText + '</li>').prependTo('#ajax-ads');
 						})	
 					}else{
