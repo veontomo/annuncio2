@@ -1,59 +1,65 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-	<title>I tuoi annunci</title>
+	<title>Filtra annunci</title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/helper.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-
 <body>
 	<?php
 	require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'helpers.php';
-
-	if(isset($_POST['submit'])){
-		$keywords = isset($_POST['keywords']) ? 
-			htmlspecialchars(strtolower($_POST['keywords'])) : "";
-		$endtime = isset($_POST['time-end']) ? setEndTime($_POST['time-end']) : strtotime('-1 hour');
-	}
+	$keywords = isset($_POST['keywords']) ?	htmlspecialchars(strtolower($_POST['keywords'])) : "";
+	$endtime = isset($_POST['end-time']) ? setEndTime($_POST['end-time']) : strtotime('-1 hour');
 	require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'retrieveDefault.php';
 	require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'createOutput.php';
 	
 	?>
-	<h1>
-		Annunci
-	</h1>
-	<p>
+	<div id="header">
 		<?php
 		if(isset($origin->url)) {
-			echo "La sorgente: <a href=\"{$origin->url}\">{$origin->url}</a>";
+			echo "<a href=\"{$origin->url}\">{$origin->url}</a>";
 		}
 		?>
-	</p>
-	<form method="post" action="#">
-		Inserisci i keyword: 
-			<input type="text" name="keywords" 
-				value="<?php echo isset($keywords) ? $keywords : "inserisci i keywords"?>">
-		Non pi&ugrave; vecchi di: 
-			<select id="time-end"name="time-end">
-				<?php echo dropDownListForEndTime($endtime) ; ?>
-			</select>
-		<input type="submit" value="Controlla" name="submit">
-	</form>
-<div id="all-ads"> 
-
-<?php
-if(count($adSelected)>0){
-	echo 'Tra di loro solo questi contengono parole chiave:<br />';
-	foreach($adSelected as $ad){
-		echo $ad->pubdate, ': <a href="'.$ad->url.'">', $ad->content, '</a><br />';
-	}
-}else{
-	echo 'Nessun annuncio con queste parole chiave trovato.<br />';
-}
-?>
-</div>
-
+	</div>
+	
+	<div id="main">
+		<div id="sidebar">
+			<div class="date">
+				<?php
+					echo date("j M h:i", time());
+				?>
+			</div>
+		</div>
+		<div id="central">
+			<h1>
+				Filtra annunci
+			</h1>
+			<form method="post" action="#">
+				<label for="keywords">Parole chiave:</label>
+					<input type="text" name="keywords" id="keywords" 
+						value="<?php echo isset($keywords) ? $keywords : "inserisci i keywords"?>"><br />
+				
+				<label for="end-time">Non pi&ugrave; vecchi di:</label>
+					<select id="end-time" name="end-time">
+						<?php echo dropDownListForEndTime($endtime) ; ?>
+					</select>
+				<input type="submit" value="Controlla" name="submit" id="submit">
+			</form>
+			<div id="all-ads"> 
+				<?php
+				if(count($adSelected)>0){
+					echo 'Tra di loro solo questi contengono parole chiave:<br />';
+					foreach($adSelected as $ad){
+						echo $ad->pubdate, ': <a href="'.$ad->url.'" target="blank">', $ad->content, '</a><br />';
+					}
+				}else{
+					echo 'Tra gli annunci non ci sono che soddisfino i criteri.<br />';
+				}
+				?>
+			</div>
+		</div>
+	</div> <!-- end of main -->
 </body>
 
 </html> 
