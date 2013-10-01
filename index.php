@@ -18,7 +18,7 @@
 	<div id="header">
 		<?php
 		if(isset($origin->url)) {
-			echo "<a href=\"{$origin->url}\">{$origin->url}</a>";
+			echo "<a href=\"{$origin->url}\" target=\"blank\">{$origin->url}</a>";
 		}
 		?>
 	</div>
