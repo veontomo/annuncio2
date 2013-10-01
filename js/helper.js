@@ -2,12 +2,14 @@ $(document).ready(function(){
 	$('#submit').click(function(){
 		var keywords = $('#keywords').val();
 		var endtime = $('#end-time').val();
+		var target = $('#targetURL').val();
 
 		$('#ajax-ads').remove();
 		$('#all-ads').html("<img class=\"loading\" src=\"images/loading.gif\" />");
 		$.post('helpers/elaborateRequest.php', 
 			{
-				'keywords': keywords,
+				'target'   : target,
+				'keywords' : keywords,
 				'end-time' : endtime
 			},
 			function(responce){

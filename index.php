@@ -16,11 +16,9 @@
 	
 	?>
 	<div id="header">
-		<?php
-		if(isset($origin->url)) {
-			echo "<a href=\"{$origin->url}\">{$origin->url}</a>";
-		}
-		?>
+		<p>
+			filtro subito
+		</p>
 	</div>
 	
 	<div id="main">
@@ -36,6 +34,17 @@
 				Filtra annunci
 			</h1>
 			<form method="post" action="#">
+				<label for="keywords">Categoria:</label>
+					<select name="targetURL" id="targetURL">
+						<option value='http://www.subito.it/annunci-lazio/vendita/arredamento-casalinghi/'>
+							subito, arredamenti
+						</option>
+						<option value='http://www.subito.it/annunci-lazio/vendita/offerte-lavoro/'>
+							subito, offerte lavoro
+						</option>
+					</select>
+						<br />
+
 				<label for="keywords">Parole chiave:</label>
 					<input type="text" name="keywords" id="keywords" 
 						value="<?php echo isset($keywords) ? $keywords : "inserisci i keywords"?>"><br />
