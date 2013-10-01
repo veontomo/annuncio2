@@ -11,16 +11,36 @@ class Origin{
 
 	public $starttime;
 	public $endtime;
-	public $url;
+	private $url;
 	public $url_template;
 	private $ads;
 	public $maxPage;
+	private $host;
 
+	private $supportedHosts = array('www.subito.it', 'www.portaportese.it');
+
+	/**
+	* set url and imposes the provider based on the url
+	*/
+	public function setUrl($str){
+		$this->url = $str;
+		$host = parse_url($this->url)['host'];
+		foreach ($this->supportedHosts as $supportedHost) {
+			if($host === $supportedHost){
+				$this->host = $supportedHost;
+				break;
+			}
+		}
+	}
+
+	public function getHost(){
+		return $this->host;
+	}
 
 	/**
 	* retrieves the content of the $url, fills in the property $ads with the advertisments found on that $url.
 	*/
-	public function retrieveOnePage($url){
+	private function retrieveOnePageSubito($url){
 		// $output = array();
 		$doc = new DOMDocument();
 		$previousSetting = libxml_use_internal_errors(true);// the previuos value of libxml_use_internal_errors
@@ -55,11 +75,11 @@ class Origin{
 		
 	}
 
-	public function retrieve(){
+	private function retrieveAllSubito(){
 		$url = $this->url;
 		$pageCount = 2;
 		do {
-			$this->retrieveOnePage($url);
+			$this->retrieveOnePageSubito($url);
 			$lastAd = end($this->ads);
 			$date = $lastAd->pubdate;
 			$isEnough = $this->endtime > strtotime($date);
@@ -67,6 +87,23 @@ class Origin{
 			$pageCount++;
 		} while (!$isEnough && ($pageCount < 3 + $this->maxPage));
 
+	}
+
+	/**
+	*	Calls the corresponding methods for retrieving the ads based on the  provider name
+	* it is better to rewrite this method: 
+	* if the provider is 'www.subito.it', call the method retrieveAllSubito()
+	* if the provider is 'www.portaportese.it', call the method retrieveAllPortaportese()
+	*/
+	public function retrieve(){
+		switch ($this->host) {
+			case 'www.subito.it':
+				$this->retrieveAllSubito();
+				break;
+			case 'www.portaportese.it':
+				// call the appropriate method when it is written
+				break;
+		}
 	}
 
 	public function getAds(){

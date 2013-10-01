@@ -25,7 +25,7 @@
 		<div id="sidebar">
 			<div class="date">
 				<?php
-					echo date("j M h:i", time());
+					echo date("j M H:i", time());
 				?>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 				if(count($adSelected)>0){
 					echo 'Tra di loro solo questi contengono parole chiave:<br />';
 					foreach($adSelected as $ad){
-						echo $ad->pubdate, ': <a href="'.$ad->url.'" target="blank">', $ad->content, '</a><br />';
+						echo $ad->pubdate, ': <a href="'.$ad->url.'" target="_blank">', $ad->content, '</a><br />';
 					}
 				}else{
 					echo 'Tra gli annunci non ci sono che soddisfino i criteri.<br />';
@@ -69,6 +69,8 @@
 			</div>
 		</div>
 	</div> <!-- end of main -->
+
 </body>
+
 
 </html> 

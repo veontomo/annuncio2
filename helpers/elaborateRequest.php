@@ -5,7 +5,7 @@ if(isset($_POST['keywords'])){
 	require_once(dirname(__FILE__)."/helpers.php");
 
 	$origin = new Origin;
-	$origin->url = htmlspecialchars($_POST['target']);
+	$origin->setUrl(htmlspecialchars($_POST['target']));
 	$origin->url_template = '?th=1&o=COUNTER';
 	$origin->starttime = time();
 	$origin->endtime = setEndTime($_POST['end-time']);
