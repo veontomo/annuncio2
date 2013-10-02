@@ -24,7 +24,8 @@ class Origin{
 	*/
 	public function setUrl($str){
 		$this->url = $str;
-		$host = parse_url($this->url)['host'];
+		$tmp=parse_url($this->url); // heroku refuses to make direct dereference
+		$host = $tmp['host'];
 		foreach ($this->supportedHosts as $supportedHost) {
 			if($host === $supportedHost){
 				$this->host = $supportedHost;
