@@ -41,6 +41,9 @@
 						<option value=''>
 							scegli l'origine
 						</option>
+						<option value='http://www.subito.it/annunci-lazio/tutto/veicoli/'>
+							subito, auto
+						</option>
 						<option value='http://www.subito.it/annunci-lazio/vendita/arredamento-casalinghi/'>
 							subito, arredamenti
 						</option>
