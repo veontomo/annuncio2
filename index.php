@@ -9,10 +9,12 @@
 <body>
 	<?php
 	require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'helpers.php';
+	require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'retrieveDefault.php';
 	$keywords = isset($_POST['keywords']) ?	htmlspecialchars(strtolower($_POST['keywords'])) : "";
 	$endtime = isset($_POST['end-time']) ? setEndTime($_POST['end-time']) : strtotime('-1 hour');
-	require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'retrieveDefault.php';
-	require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'createOutput.php';
+	$url = isset($_POST['targetURL']) ? htmlspecialchars($_POST['targetURL']) : NULL;
+	$ad = retrieveDefault($url, $endtime);
+	$adSelected = filterAds($ad, $keywords);
 	
 	?>
 	<div id="header">
@@ -36,6 +38,9 @@
 			<form method="post" action="#">
 				<label for="keywords">Categoria:</label>
 					<select name="targetURL" id="targetURL">
+						<option value=''>
+							scegli l'origine
+						</option>
 						<option value='http://www.subito.it/annunci-lazio/vendita/arredamento-casalinghi/'>
 							subito, arredamenti
 						</option>
